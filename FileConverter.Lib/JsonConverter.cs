@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace FileConverter.Lib
 {
-    public class JsonConverter
+    public class JsonConverter //TODO Реализовать парсинг корневого массива элементов
     {
         private Dictionary<string, string> _dom;
 
