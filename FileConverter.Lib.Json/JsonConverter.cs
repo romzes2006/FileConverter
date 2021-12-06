@@ -1,22 +1,19 @@
 ﻿#nullable enable
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Text.Json;
 
-namespace FileConverter.Lib
+namespace FileConverter.Lib.Json
 {
-    public class JsonConverter //TODO Реализовать парсинг корневого массива элементов
+    public class JsonConverter : FileConverter //TODO Реализовать парсинг корневого массива элементов
     {
-        public Dom dom;
 
-        public JsonConverter()
+
+        public JsonConverter() : base()
         {
-            dom = new Dom();
         }
-        
-        public void OnParse(string str)
+
+        public override void OnParse(string str)
         {
             using var doc = JsonDocument.Parse(str);
             var root = doc.RootElement;

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FileConverter.Lib\FileConverter.Lib.csproj" />
+      <ProjectReference Include="..\FileConverter.Lib\FileConverter.Lib.Dom.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FileConverter.Lib
+namespace FileConverter.Lib.Dom
 {
     public class Dom
     {
@@ -16,6 +16,10 @@ namespace FileConverter.Lib
             _dom.Add(key, value);
         }
 
+        public override string ToString()
+        {
+            return ToString(new ExportToCsv(';'));
+        }
         public string ToString(IExport exportTo)
         {
             return exportTo.Export(_dom);

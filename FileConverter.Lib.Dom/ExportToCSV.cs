@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FileConverter.Lib
+namespace FileConverter.Lib.Dom
 {
     public class ExportToCsv : IExport
     {
