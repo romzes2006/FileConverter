@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
-using FileConverter.Lib;
+using FileConverter.Lib.Dom;
+using FileConverter.Lib.Json;
 
 namespace FileConverter.Test
 {
-    class Program
+    static class Program
     {
         static void Main()
         {
@@ -14,11 +15,10 @@ namespace FileConverter.Test
             var json = new JsonConverter();
             json.OnParse(str);
 
-            var temp = json.DOMToString();
-            foreach (var s in temp)
-            {
-                Console.WriteLine(s);
-            }
+            var temp = json.dom.ToString(new ExportToCsv('|'));
+            Console.WriteLine(temp);
+            
+            Console.WriteLine(json.dom.ToString());
         }
     }
 }
