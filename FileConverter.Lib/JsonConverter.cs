@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json;
@@ -8,11 +9,11 @@ namespace FileConverter.Lib
 {
     public class JsonConverter //TODO Реализовать парсинг корневого массива элементов
     {
-        private Dictionary<string, string> _dom;
+        private Dom _dom;
 
         public JsonConverter()
         {
-            _dom = new Dictionary<string, string>();
+            _dom = new Dom();
         }
         
         public void OnParse(string str)
@@ -34,10 +35,10 @@ namespace FileConverter.Lib
                     JsonElementObjectParse(element, name);
                     break;
                 case JsonValueKind.Number:
-                    JsonElementNumberParse(element, name);
+                    JsonElementParse(element, name, new JsonNumber());
                     break;
                 case JsonValueKind.String:
-                    JsonElementStringParse(element, name);
+                    JsonElementParse(element, name, new JsonString());
                     break;
                 case JsonValueKind.False:
                     break;
@@ -47,7 +48,14 @@ namespace FileConverter.Lib
                     break;
                 case JsonValueKind.Undefined:
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void JsonElementParse(JsonElement element, string? name, ISingleElementParse jsonParse)
+        {
+            jsonParse.Parse(element, name, ref _dom);
         }
 
         private void JsonElementArrayParse(JsonElement element, string? name)
@@ -70,32 +78,6 @@ namespace FileConverter.Lib
             {
                 GetTypeJsonElement(item.Value, item.Name);
             }
-        }
-
-        private void JsonElementNumberParse(JsonElement element, string? name)
-        {
-            var number = element.GetDecimal();
-            _dom.Add(name, number.ToString(CultureInfo.InvariantCulture));
-        }
-
-        private void JsonElementStringParse(JsonElement element, string? name)
-        {
-            var str = element.GetString();
-            _dom.Add(name, str);
-        }
-
-        public string[] DOMToString()
-        {
-            var result = new string[_dom.Count];
-
-            var index = 0;
-            foreach (var item in _dom)
-            {
-                result[index] = $"{item.Key} -> {item.Value}";
-                ++index;
-            }
-            
-            return result;
         }
     }
 }
