@@ -9,11 +9,11 @@ namespace FileConverter.Lib
 {
     public class JsonConverter //TODO Реализовать парсинг корневого массива элементов
     {
-        private Dom _dom;
+        public Dom dom;
 
         public JsonConverter()
         {
-            _dom = new Dom();
+            dom = new Dom();
         }
         
         public void OnParse(string str)
@@ -55,7 +55,7 @@ namespace FileConverter.Lib
 
         private void JsonElementParse(JsonElement element, string? name, ISingleElementParse jsonParse)
         {
-            jsonParse.Parse(element, name, ref _dom);
+            jsonParse.Parse(element, name, ref dom);
         }
 
         private void JsonElementArrayParse(JsonElement element, string? name)
