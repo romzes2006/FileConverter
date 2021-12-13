@@ -13,10 +13,10 @@ namespace CLI.Lib
             return Path.GetFileName(filepath);
         }
 
-        public string GetFileWitoutEXT(string filename)
+        public string GetFileWitoutExt(string filename)
         {
             var lastposition = filename.LastIndexOf('.');
-            return filename.Substring(0, lastposition - 1);
+            return filename.Substring(0, lastposition);
         }
     }
     
