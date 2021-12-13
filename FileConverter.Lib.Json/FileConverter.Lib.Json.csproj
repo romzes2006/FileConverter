@@ -7,7 +7,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FileConverter.Lib\FileConverter.Lib.csproj" />
-      <ProjectReference Include="..\FileConverter.Lib\FileConverter.Lib.Dom.csproj" />
     </ItemGroup>
 
 </Project>

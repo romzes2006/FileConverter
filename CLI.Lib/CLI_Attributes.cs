@@ -11,6 +11,11 @@ namespace CLI.Lib
             _attributes = attributes;
         }
 
+        public bool IsEmpty()
+        {
+            return _attributes.Length == 0;
+        }
+
         private bool SearchKeyValue(string key, out string value)
         {
             for (int i = 0; i < _attributes.Length; i++)

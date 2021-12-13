@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CLI.Lib\CLI.Lib.csproj" />
       <ProjectReference Include="..\FileConverter.Lib.Json\FileConverter.Lib.Json.csproj" />
       <ProjectReference Include="..\FileConverter.Lib\FileConverter.Lib.csproj" />
     </ItemGroup>
