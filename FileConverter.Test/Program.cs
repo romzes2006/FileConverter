@@ -19,13 +19,15 @@ namespace FileConverter.Test
                 Console.WriteLine("Нет аргументов!");
                 return;
             }
-            
+
             var input = attributes.InputKey(out var pathSource) ? pathSource : throw new Exception();
-            var output = attributes.OutputKey(out var pathDist) ? pathDist : String.Concat((PathParser.GetFileWithoutExt(PathParser.GetFileName(pathSource)), ".csv"));
+            var output = attributes.OutputKey(out var pathDist)
+                ? pathDist
+                : String.Concat((PathParser.GetFileWithoutExt(PathParser.GetFileName(pathSource)), ".csv"));
             var delimiter = attributes.DelimiterKey(out var d) ? d : ';';
             var encodingOutFile = attributes.EncodingFile();
-            
-            
+            var silentMode = attributes.IsSilentMode();
+
             using var file = new StreamReader(input);
             var str = file.ReadToEnd();
 
@@ -38,9 +40,12 @@ namespace FileConverter.Test
                 outfile.Write(temp);
                 outfile.Close();
             }
-            Console.WriteLine(temp);
-            
-            Console.WriteLine(json.dom.ToString());
+            if (!silentMode)
+            {
+                Console.WriteLine(temp);
+
+                Console.WriteLine(json.dom.ToString());
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Text;
 
 namespace CLI.Lib
@@ -17,14 +18,21 @@ namespace CLI.Lib
             return _attributes.Length == 0;
         }
 
-        private bool SearchKeyValue(string key, out string value)
+        private bool SearchKeyValue(string key, out string? value)
         {
             for (int i = 0; i < _attributes.Length; i++)
             {
                 if (_attributes[i] != key) continue;
-
-                value = _attributes[i + 1];
-                return true;
+                try
+                {
+                    value = _attributes[i + 1];
+                    return true;
+                }
+                catch
+                {
+                    value = null;
+                    return true;
+                }
             }
 
             value = null;
@@ -48,6 +56,12 @@ namespace CLI.Lib
             return res;
         }
 
+        public bool IsSilentMode()
+        {
+            return SearchKeyValue("-q", out var d);
+            
+        }
+
         public System.Text.Encoding EncodingFile()
         {
             var res = SearchKeyValue("-e", out var d);
@@ -61,7 +75,7 @@ namespace CLI.Lib
 
                 case "ASCII":
                     return Encoding.ASCII;
-                default: 
+                default:
                     return Encoding.Default;
             }
         }
