@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace CLI.Lib
 {
@@ -21,7 +22,7 @@ namespace CLI.Lib
             for (int i = 0; i < _attributes.Length; i++)
             {
                 if (_attributes[i] != key) continue;
-                
+
                 value = _attributes[i + 1];
                 return true;
             }
@@ -46,6 +47,23 @@ namespace CLI.Lib
             delimiter = Convert.ToChar(d);
             return res;
         }
+
+        public System.Text.Encoding EncodingFile()
+        {
+            var res = SearchKeyValue("-e", out var d);
+            switch (d)
+            {
+                case "utf-8":
+                    return Encoding.UTF8;
+
+                case "windows1251":
+                    return Encoding.Unicode;
+
+                case "ASCII":
+                    return Encoding.ASCII;
+                default: 
+                    return Encoding.Default;
+            }
+        }
     }
 }
-
