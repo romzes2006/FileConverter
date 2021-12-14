@@ -71,12 +71,15 @@ namespace CLI.Lib
                     return Encoding.UTF8;
 
                 case "windows1251":
-                    return Encoding.Unicode;
-
+                    return Encoding.GetEncoding(1251);
                 case "ASCII":
                     return Encoding.ASCII;
                 default:
                     return Encoding.Default;
+                    /*Заметка для себя...
+                     utf8_bytes = UTF8.GetBytes(read.ReadLine());
+                    ansi_bytes = Encoding.Convert(UTF8, ANSI, utf8_bytes);*/
+                
             }
         }
     }
